@@ -47,13 +47,12 @@ def create_spend_chart(categories):
     chart = "Percentage spent by category\n"
     # Bar chart
     for i in range(100, -1, -10):
-        line = f"{i:>3}|"
+        line = f"{i:>3}| "
         for perc in percentages:
-            line += " o " if perc >= i else "   "
-            line += "  "  # 2 spaces after each bar
-        chart += line.rstrip() + "\n"
+            line += "o  " if perc >= i else "   "
+        chart += line + "\n"
     # Dashes: 3 per category, plus 2 extra
-    chart += "    " + ("-" * (len(categories) * 3 + 2)) + "\n"
+    chart += "    -" + ("---" * (len(categories))) + "\n"
     # Category names vertically
     names = [cat.name for cat in categories]
     max_len = max(len(name) for name in names)
@@ -61,8 +60,8 @@ def create_spend_chart(categories):
         line = "     "
         for name in names:
             line += (name[i] if i < len(name) else " ") + "  "  # 2 spaces after each letter
-        chart += line.rstrip() + ("\n" if i < max_len - 1 else "")
-    return chart.rstrip("\n")
+        chart += line + ("\n" if i < max_len - 1 else "")
+    return chart
 
 
 if __name__ == "__main__":
@@ -72,11 +71,11 @@ if __name__ == "__main__":
     food.withdraw(15.89, "restaurant and more food for dessert")
     clothing = Category("Clothing")
     auto = Category("Auto")
-    food.transfer(50, clothing)
+    food.transfer(5, clothing)
     clothing.withdraw(25.55, "clothes")
     clothing.withdraw(100, "shoes")
     auto.deposit(1000, "initial deposit")
-    auto.withdraw(15, "gasoline")
+    auto.withdraw(150, "gasoline")
     print(food)
     print(clothing)
     print(auto)
